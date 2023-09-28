@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(108, 108, 218);
+    font-family: sans-serif;
+}
+
+.container {
+    width: 500px;
+    background-color: antiquewhite;
+    position: relative;
+    top: 100px;
+    left: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    width: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+}
+
+#inp {
+    width: 325px;
+    height: 25px;
+}
+
+button {
+    height: 30px;
+    width: 55px;
+    background-color: maroon;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+.to-do {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    width: 350px;
+    background-color: white;
+    margin: 10px 0px;
+    border: 1px solid black;
+}
+
+.completed {
+    background-color: rgba(144, 250, 144, 0.729);
+}
+
+.disable {
+    display: none;
+}

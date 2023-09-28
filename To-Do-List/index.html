@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="to-do-list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        <div class="input">
+            <input type="text" placeholder="Enter your task" id="inp">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <div class="text" id="list">
+            
+        </div>
+    </div>
+
+    <script>
+        const input = document.querySelector("#inp");
+        const listArea = document.querySelector("#list");
+        const listNodes = listArea.children;
+        const listArray = [];
+        
+        const createElement = (task) => {
+            const createdTask = document.createElement("div");
+            createdTask.classList.add("to-do");
+            createdTask.classList.add(task.status);
+            createdTask.innerHTML = task.text;
+
+            const operationDiv = document.createElement("div");
+
+            if(task.status !== "done") {
+                const doneButton = document.createElement("button");
+                doneButton.innerHTML = '<i class="fa-solid fa-square-check"></i>';
+                doneButton.setAttribute("onclick", "markThisTask(this)");
+                doneButton.addEventListener("click", markThisTask);
+                operationDiv.append(doneButton);
+            }
+
+            const deleteButton = document.createElement("button");
+            deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            deleteButton.setAttribute("onclick","deleteThisTask(this)");
+            deleteButton.addEventListener("click", deleteThisTask);
+            operationDiv.appendChild(deleteButton);
+            operationDiv.setAttribute("class","operations")
+
+            createdTask.append(operationDiv);
+
+            return createdTask;
+        }
+
+
+        const addTask = () => {
+            listArea.innerHTML = "";
+
+            const task = {
+                text: input.value,
+                status: "not-completed",
+            };
+
+            listArray.push(task);
+
+            listArray.forEach(task => {
+                listArea.append(createElement(task));
+            });
+
+            input.value = "";
+            
+        }
+
+
+        const markThisTask = (button) => {
+            const toDo = button.parentElement.parentElement;
+            toDo.style.backgroundColor = "rgba(144, 250, 144, 0.729)";
+
+            const index = Array.from(listNodes).indexOf(toDo);
+            listArray[index].status = "completed";
+
+            button.remove();
+        }
+
+        const deleteThisTask = (button) => {
+            const toDo = button.parentElement.parentElement;
+
+            const index = Array.from(listNodes).indexOf(toDo);
+            listArray.splice(index,1);
+
+            toDo.remove();
+        }
+        
+    </script>
+
+</body>
+
+</html>
